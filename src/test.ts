@@ -21,6 +21,16 @@ getTestBed().initTestEnvironment(
 );
 
 // Then we find all the tests.
-const context = require.context('./', true, /\.spec\.ts$/);
-// And load the modules.
-context.keys().forEach(context);
+// const context = require.context('./', true, /\.spec\.ts$/);
+// // And load the modules.
+// context.keys().forEach(context);
+
+// const context = require.context('./', true, /\.spec\.ts$/);
+// context.keys().map(context);
+
+const context = (import.meta as any).webpackContext('./', {
+  recursive: true,
+  regExp: /\.spec\.ts$/,
+});
+context.keys().map(context);
+

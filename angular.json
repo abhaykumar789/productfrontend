@@ -18,6 +18,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "baseHref": "/",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -96,11 +97,60 @@
             ],
             "scripts": []
           }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "app:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "app:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "app:serve:development"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "app:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "app:serve:production"
+            }
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "fd1aae89-5ca9-4b75-bccf-437d3c814f6f"
+    "analytics": "fd1aae89-5ca9-4b75-bccf-437d3c814f6f",
+    "schematicCollections": [
+      "@cypress/schematic",
+      "@schematics/angular"
+    ]
   }
 }

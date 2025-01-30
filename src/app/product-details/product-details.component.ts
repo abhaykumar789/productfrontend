@@ -10,16 +10,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductDetailsComponent implements OnInit {
   pname = "One Plus 9r";
-  pcity = "Patna,Bihar";
+  pcity = "Patna, Bihar";
   pdatepost = "";
   pcoin = 20000;
-  description =
-    " Operating System: OxygenOS based on Android 11 CPU: Qualcomm® Snapdragon™ 870.. GPU: Adreno 650. RAM: 8GB/12GB";
+  description = "Operating System: OxygenOS based on Android 11 CPU: Qualcomm® Snapdragon™ 870.. GPU: Adreno 650. RAM: 8GB/12GB";
   pcategory = "";
-  image:string="";
-  pid = 2;
+  image: string = "";
+  pid: number = 2;
   public productdata: any;
-
 
   constructor(
     private _productdetailsService: ProductService,
@@ -29,25 +27,28 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Retrieve the 'id' parameter from the route
     this.pid = this._route.snapshot.params['id'];
 
-    this.productService.getProductById(this.pid).subscribe((data) => {
-      this.productdata = data;
-       console.log(data);
-      
-      this.pname = this.productdata.pname
-      this.pcategory = this.productdata.pcategory
-      this.pcity = this.productdata.pcity
-      this.pdatepost = this.productdata.pdatepost
-      this.pcoin = this.productdata.pcoin
-      this.description = this.productdata.description
-      this.image=this.productdata.image
+    // Fetch product data by ID
+    this.productService.getProductById(this.pid).subscribe(
+      (data) => {
+        this.productdata = data;
+        console.log(data);
 
-      
-      
-
-    })
+        // Assign fetched data to component properties
+        this.pname = this.productdata.pname;
+        this.pcategory = this.productdata.pcategory;
+        this.pcity = this.productdata.pcity;
+        this.pdatepost = this.productdata.pdatepost;
+        this.pcoin = this.productdata.pcoin;
+        this.description = this.productdata.description;
+        this.image = this.productdata.image;
+      },
+      (error) => {
+        // Handle error
+        console.error('Error fetching product data', error);
+      }
+    );
   }
-
-
 }

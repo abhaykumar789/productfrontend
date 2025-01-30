@@ -8,7 +8,7 @@ import { Product } from '../model/product';
 export class ProductService {
 
   // baseUrl = "http://localhost:8080"
-  baseUrl = "https://productappbackend.internal.wonderfulmushroom-dc7458d0.eastus.azurecontainerapps.io:8081"
+  baseUrl = "https://productbackend-acfrebg5adcwa4d2.canadacentral-01.azurewebsites.net/"
 
   constructor(private httpClient: HttpClient) { }
 
